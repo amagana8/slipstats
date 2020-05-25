@@ -2,9 +2,9 @@
 Discord bot to show melee match statistics through slippi.
 
 # Requirements
-* py-slippi: 
-  * https://github.com/hohav/py-slippi
+* slp-parser-js: 
+  * https://github.com/project-slippi/slp-parser-js
 
-* discord.py: 
-  * https://github.com/Rapptz/discord.py
+* discord.js: 
+  * https://github.com/discordjs/discord.js
  
