@@ -7,7 +7,8 @@ module.exports = {
         const game = new SlippiGame(path);
         const stats = game.getStats();
         const metadata = game.getMetadata();
-        return [stats, metadata];
+        const settings = game.getSettings();
+        return [stats, metadata, settings];
     },
     // turns frame_count into min:sec format
     convertTime: function(frame_count) {
@@ -24,5 +25,85 @@ module.exports = {
     const p2_stats = stats.overall[1];
     const p2_actions = stats.actionCounts[1];
     return [p1_stats, p1_actions, p2_stats, p2_actions];
+    },
+    // turn conversion raio into percent
+    ratioPercent: function(ratio) {
+        let percent = ratio * 100;
+        percent = percent.toFixed(2);
+        return percent;
+    },
+
+    // get stage name from stage ID
+    getStageName: function(stage_id) {
+        const stage_dict = {2: 'Fountain Of Dreams',
+        3: 'Pokémon Stadium',
+        4: 'Princess Peach’s Castle',
+        5: 'Kongo Jungle',
+        6: 'Brinstar ',
+        7: 'Corneria ',
+        8: 'Yoshi’s Story',
+        9: 'Onett ',
+        10: 'Mute City',
+        11: 'Rainbow Cruise',
+        12: 'Jungle Japes',
+        13: 'Great Bay',
+        14: 'Hyrule Temple',
+        15: 'Brinstar Depths',
+        16: 'Yoshi’s Island',
+        17: 'Green Greens',
+        18: 'Fourside',
+        19: 'Mushroom Kingdom I',
+        20: 'Mushroom Kingdom Ii',
+        22: 'Venom',
+        23: 'Poke Floats',
+        24: 'Big Blue',
+        25: 'Icicle Mountain',
+        26: 'Icetop',
+        27: 'Flat Zone',
+        28: 'Dream Land',
+        29: 'Yoshi’s Island N64',
+        30: 'Kongo Jungle N64',
+        31: 'Battlefield',
+        32: 'Final Destination'};
+        const stage = stage_dict[stage_id];
+        return stage;
+    },
+
+    getCharName: function(char_id) {
+        const char_dict = {0: 'Mario',
+        1: 'Fox',
+        2: 'Captain Falcon',
+        3: 'Donkey Kong',
+        4: 'Kirby',
+        5: 'Bowser',
+        6: 'Link',
+        7: 'Sheik',
+        8: 'Ness',
+        9: 'Peach',
+        10: 'Popo',
+        11: 'Nana',
+        12: 'Pikachu',
+        13: 'Samus',
+        14: 'Yoshi',
+        15: 'Jigglypuff',
+        16: 'Mewtwo',
+        17: 'Luigi',
+        18: 'Marth',
+        19: 'Zelda',
+        20: 'Young Link',
+        21: 'Dr Mario',
+        22: 'Falco',
+        23: 'Pichu',
+        24: 'Game And Watch',
+        25: 'Ganondorf',
+        26: 'Roy',
+        27: 'Master Hand',
+        28: 'Crazy Hand',
+        29: 'Wireframe Male',
+        30: 'Wireframe Female',
+        31: 'Giga Bowser',
+        32: 'Sandbag'};
+        const char = char_dict[char_id];
+        return char;
     }
 };

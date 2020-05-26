@@ -2,25 +2,38 @@
 const Discord = require('discord.js');
 const slipStats = require('./SlipStats');
 
+// set bot token
+const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xs1KEg.YU4TzF70abR7jHIIS9zBNH92RnY';
+
 // create a new Discord client
 const client = new Discord.Client();
 
+// set command prefix
 const prefix = '!';
+
 client.on('message', (msg) => {
+    // look for command messages only
     if (!msg.content.startsWith(prefix) || msg.author.bot) {
         return;
     }
+    // get bot command and command argument
     const args = msg.content.slice(prefix.length).split(' ');
     const command = args.shift().toLowerCase();
     if (command === 'stats') {
         let path = msg.content.substring(7);
         path = decodeURIComponent(path);
-        msg.channel.send(`Found replay at ${path}`);
         const game_data = slipStats.loadReplay(path);
+        const stage_ = slipStats.getStageName(game_data[2].stageId);
         const time_ = slipStats.convertTime(game_data[1].lastFrame);
+        const char_1 = slipStats.getCharName(game_data[2].players[0].characterId);
+        const char_2 = slipStats.getCharName(game_data[2].players[1].characterId);
         const stats_ = slipStats.playerStats(game_data[0]);
-        msg.channel.send(`Time: ${time_}`);
+        const ocr_1 = slipStats.ratioPercent(stats_[0].successfulConversions.ratio);
+        const ocr_2 = slipStats.ratioPercent(stats_[2].successfulConversions.ratio);
         msg.channel.send(`\`\`\`
+        Stage: ${stage_}                     Duration: ${time_}
+        Player 1: ${game_data[1].players[0].names.netplay} as ${char_1}
+        Player 2: ${game_data[1].players[1].names.netplay} as ${char_2}
         ╔══════════════════════════════════╦══════════╦══════════╗
         ║                                  ║ Player 1 ║ Player 2 ║
         ╠══════════════════════════════════╬══════════╬══════════╣
@@ -30,23 +43,23 @@ client.on('message', (msg) => {
         ╠══════════════════════════════════╬══════════╬══════════╣
         ║ Wavedashes/Wavelands/Dash Dances ║ ${stats_[1].wavedashCount}/${stats_[1].wavelandCount}/${stats_[1].dashDanceCount}   ║ ${stats_[3].wavedashCount}/${stats_[3].wavelandCount}/${stats_[3].dashDanceCount}   ║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Opening Conversion Rate          ║          ║          ║
+        ║ Opening Conversion Rate          ║ ${ocr_1}%   ║ ${ocr_2}%   ║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Openings/Kill                    ║          ║          ║
+        ║ Openings/Kill                    ║ ${stats_[0].openingsPerKill.ratio.toFixed(1)}      ║ ${stats_[2].openingsPerKill.ratio.toFixed(1)}      ║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Damage/Opening                   ║          ║          ║
+        ║ Damage/Opening                   ║ ${stats_[0].damagePerOpening.ratio.toFixed(1)}     ║ ${stats_[2].damagePerOpening.ratio.toFixed(1)}     ║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Neutral Wins                     ║          ║          ║
+        ║ Neutral Wins                     ║ ${stats_[0].neutralWinRatio.count}       ║ ${stats_[2].neutralWinRatio.count}       ║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Counter Hits                     ║          ║          ║
+        ║ Counter Hits                     ║ ${stats_[0].counterHitRatio.count}        ║ ${stats_[2].counterHitRatio.count}        ║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Beneficial Trades                ║          ║          ║
+        ║ Beneficial Trades                ║ ${stats_[0].beneficialTradeRatio.count}        ║ ${stats_[2].beneficialTradeRatio.count}        ║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Inputs/Min                       ║          ║          ║
+        ║ Inputs/Min                       ║ ${stats_[0].inputsPerMinute.ratio.toFixed(1)}    ║ ${stats_[2].inputsPerMinute.ratio.toFixed(1)}    ║
         ╚══════════════════════════════════╩══════════╩══════════╝
         \`\`\``);
     }
 });
 
 // login to Discord with your app's token
-client.login('NzE0NDAxMTk0OTMxMzg4NDg4.Xsx2Pg.G1754c_LXJ8mzYtEn30o5sNKV2U');
+client.login(token);
