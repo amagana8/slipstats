@@ -1,0 +1,24 @@
+{
+  "name": "slipstats",
+  "version": "1.0.0",
+  "description": "Discord bot to show melee match statistics through slippi.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amagana8/slipstats.git"
+  },
+  "author": "amagana8",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/amagana8/slipstats/issues"
+  },
+  "homepage": "https://github.com/amagana8/slipstats#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "fs": "0.0.1-security",
+    "slp-parser-js": "^4.1.0"
+  }
+}
