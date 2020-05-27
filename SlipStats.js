@@ -33,6 +33,21 @@ module.exports = {
         return percent;
     },
 
+    //find which ports the players used
+    assignPlayers: function(metadata) {
+        for (i = 0; i < 5; i++) {
+            if (typeof(metadata.players[i]) !== 'undefined') {
+                const char1 = metadata.players[i];
+                for (j = i+1; j < 5; j++) {
+                    if (typeof(metadata.players[j]) !== 'undefined') {
+                        const char2 = metadata.players[j];
+                        return [char1, char2];
+                    }
+                }
+            }
+        }
+    },
+
     // get stage name from stage ID
     getStageName: function(stage_id) {
         const stage_dict = {2: 'Fountain Of Dreams',
@@ -69,6 +84,7 @@ module.exports = {
         return stage;
     },
 
+    // get character name from character ID
     getCharName: function(char_id) {
         const char_dict = {0: 'Mario',
         1: 'Fox',

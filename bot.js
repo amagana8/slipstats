@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const slipStats = require('./SlipStats');
 
 // set bot token
-const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xs1KEg.YU4TzF70abR7jHIIS9zBNH92RnY';
+const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xs2dKQ.QtECrFQlrVP7anZNH25rYkj1RMk';
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -25,15 +25,17 @@ client.on('message', (msg) => {
         const game_data = slipStats.loadReplay(path);
         const stage_ = slipStats.getStageName(game_data[2].stageId);
         const time_ = slipStats.convertTime(game_data[1].lastFrame);
-        const char_1 = slipStats.getCharName(game_data[2].players[0].characterId);
-        const char_2 = slipStats.getCharName(game_data[2].players[1].characterId);
+        const player1 = slipStats.assignPlayers(game_data[1])[0];
+        const player2 = slipStats.assignPlayers(game_data[1])[1];
+        const char_1 = slipStats.getCharName(parseInt(Object.keys(player1.characters)));
+        const char_2 = slipStats.getCharName(parseInt(Object.keys(player2.characters)));
         const stats_ = slipStats.playerStats(game_data[0]);
         const ocr_1 = slipStats.ratioPercent(stats_[0].successfulConversions.ratio);
         const ocr_2 = slipStats.ratioPercent(stats_[2].successfulConversions.ratio);
         msg.channel.send(`\`\`\`
         Stage: ${stage_}                     Duration: ${time_}
-        Player 1: ${game_data[1].players[0].names.netplay} as ${char_1}
-        Player 2: ${game_data[1].players[1].names.netplay} as ${char_2}
+        Player 1: ${player1.names.netplay} as ${char_1}
+        Player 2: ${player2.names.netplay} as ${char_2}
         ╔══════════════════════════════════╦══════════╦══════════╗
         ║                                  ║ Player 1 ║ Player 2 ║
         ╠══════════════════════════════════╬══════════╬══════════╣
