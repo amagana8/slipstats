@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const slipStats = require('./SlipStats');
 
 // set bot token
-const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xs2dKQ.QtECrFQlrVP7anZNH25rYkj1RMk';
+const token = '';
 
 // create a new Discord client
 const client = new Discord.Client();
