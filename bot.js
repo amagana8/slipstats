@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const slipStats = require('./SlipStats');
 
 // set bot token
-const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xs4eZg.EAt4P3jxsN0TEWenSYwbGmhRV7k';
+const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xs9_9g.-dTe6LSsTGbdNeUGSoWeDHukB-4';
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -27,15 +27,17 @@ client.on('message', (msg) => {
         const time_ = slipStats.convertTime(game_data[1].lastFrame);
         const player1 = slipStats.assignPlayers(game_data[1])[0];
         const player2 = slipStats.assignPlayers(game_data[1])[1];
-        const char_1 = slipStats.getCharName(parseInt(Object.keys(player1.characters)));
-        const char_2 = slipStats.getCharName(parseInt(Object.keys(player2.characters)));
+        const char1 = slipStats.getCharName(parseInt(Object.keys(player1.characters)));
+        const char2 = slipStats.getCharName(parseInt(Object.keys(player2.characters)));
         const stats_ = slipStats.playerStats(game_data[0]);
-        const ocr_1 = slipStats.ratioPercent(stats_[0].successfulConversions.ratio);
-        const ocr_2 = slipStats.ratioPercent(stats_[2].successfulConversions.ratio);
+        const actions1 = stats_[1].wavedashCount.toString() + '/' + stats_[1].wavelandCount.toString() + '/' + stats_[1].dashDanceCount.toString();
+        const actions2 = stats_[3].wavedashCount.toString() + '/' + stats_[3].wavelandCount.toString() + '/' + stats_[3].dashDanceCount.toString();
+        const ocr1 = slipStats.ratioPercent(stats_[0].successfulConversions.ratio).toString() + '%';
+        const ocr2 = slipStats.ratioPercent(stats_[2].successfulConversions.ratio).toString() + '%';
         msg.channel.send(`\`\`\`
         Stage: ${stage_}                     Duration: ${time_}
-        Player 1: ${player1.names.netplay} as ${char_1}
-        Player 2: ${player2.names.netplay} as ${char_2}
+        Player 1: ${player1.names.netplay} as ${char1}
+        Player 2: ${player2.names.netplay} as ${char2}
         ╔══════════════════════════════════╦══════════╦══════════╗
         ║                                  ║ Player 1 ║ Player 2 ║
         ╠══════════════════════════════════╬══════════╬══════════╣
@@ -43,9 +45,9 @@ client.on('message', (msg) => {
         ╠══════════════════════════════════╬══════════╬══════════╣
         ║ Damage Done                      ║ ${stats_[0].totalDamage.toFixed(1).toString().padEnd(9)}║ ${stats_[2].totalDamage.toFixed(1).toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Wavedashes/Wavelands/Dash Dances ║ ${stats_[1].wavedashCount}/${stats_[1].wavelandCount}/${stats_[1].dashDanceCount.toString().padEnd(5)}║ ${stats_[3].wavedashCount}/${stats_[3].wavelandCount}/${stats_[3].dashDanceCount.toString().padEnd(5)}║
+        ║ Wavedashes/Wavelands/Dash Dances ║ ${actions1.padEnd(9)}║ ${actions2.padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Opening Conversion Rate          ║ ${ocr_1}${'%'.padEnd(4)}║ ${ocr_2}${'%'.padEnd(4)}║
+        ║ Opening Conversion Rate          ║ ${ocr1.padEnd(9)}║ ${ocr2.padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
         ║ Openings/Kill                    ║ ${stats_[0].openingsPerKill.ratio.toFixed(1).toString().padEnd(9)}║ ${stats_[2].openingsPerKill.ratio.toFixed(1).toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
