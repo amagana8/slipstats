@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const slipStats = require('./SlipStats');
 
 // set bot token
-const token = '';
+const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xs4eZg.EAt4P3jxsN0TEWenSYwbGmhRV7k';
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -39,25 +39,25 @@ client.on('message', (msg) => {
         ╔══════════════════════════════════╦══════════╦══════════╗
         ║                                  ║ Player 1 ║ Player 2 ║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Kills                            ║ ${stats_[0].killCount}        ║ ${stats_[2].killCount}        ║
+        ║ Kills                            ║ ${stats_[0].killCount.toString().padEnd(9)}║ ${stats_[2].killCount.toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Damage Done                      ║ ${stats_[0].totalDamage.toFixed(1)}    ║ ${stats_[2].totalDamage.toFixed(1)}    ║
+        ║ Damage Done                      ║ ${stats_[0].totalDamage.toFixed(1).toString().padEnd(9)}║ ${stats_[2].totalDamage.toFixed(1).toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Wavedashes/Wavelands/Dash Dances ║ ${stats_[1].wavedashCount}/${stats_[1].wavelandCount}/${stats_[1].dashDanceCount}   ║ ${stats_[3].wavedashCount}/${stats_[3].wavelandCount}/${stats_[3].dashDanceCount}   ║
+        ║ Wavedashes/Wavelands/Dash Dances ║ ${stats_[1].wavedashCount}/${stats_[1].wavelandCount}/${stats_[1].dashDanceCount.toString().padEnd(5)}║ ${stats_[3].wavedashCount}/${stats_[3].wavelandCount}/${stats_[3].dashDanceCount.toString().padEnd(5)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Opening Conversion Rate          ║ ${ocr_1}%   ║ ${ocr_2}%   ║
+        ║ Opening Conversion Rate          ║ ${ocr_1}${'%'.padEnd(4)}║ ${ocr_2}${'%'.padEnd(4)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Openings/Kill                    ║ ${stats_[0].openingsPerKill.ratio.toFixed(1)}      ║ ${stats_[2].openingsPerKill.ratio.toFixed(1)}      ║
+        ║ Openings/Kill                    ║ ${stats_[0].openingsPerKill.ratio.toFixed(1).toString().padEnd(9)}║ ${stats_[2].openingsPerKill.ratio.toFixed(1).toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Damage/Opening                   ║ ${stats_[0].damagePerOpening.ratio.toFixed(1)}     ║ ${stats_[2].damagePerOpening.ratio.toFixed(1)}     ║
+        ║ Damage/Opening                   ║ ${stats_[0].damagePerOpening.ratio.toFixed(1).toString().padEnd(9)}║ ${stats_[2].damagePerOpening.ratio.toFixed(1).toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Neutral Wins                     ║ ${stats_[0].neutralWinRatio.count}       ║ ${stats_[2].neutralWinRatio.count}       ║
+        ║ Neutral Wins                     ║ ${stats_[0].neutralWinRatio.count.toString().padEnd(9)}║ ${stats_[2].neutralWinRatio.count.toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Counter Hits                     ║ ${stats_[0].counterHitRatio.count}        ║ ${stats_[2].counterHitRatio.count}        ║
+        ║ Counter Hits                     ║ ${stats_[0].counterHitRatio.count.toString().padEnd(9)}║ ${stats_[2].counterHitRatio.count.toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Beneficial Trades                ║ ${stats_[0].beneficialTradeRatio.count}        ║ ${stats_[2].beneficialTradeRatio.count}        ║
+        ║ Beneficial Trades                ║ ${stats_[0].beneficialTradeRatio.count.toString().padEnd(9)}║ ${stats_[2].beneficialTradeRatio.count.toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣
-        ║ Inputs/Min                       ║ ${stats_[0].inputsPerMinute.ratio.toFixed(1)}    ║ ${stats_[2].inputsPerMinute.ratio.toFixed(1)}    ║
+        ║ Inputs/Min                       ║ ${stats_[0].inputsPerMinute.ratio.toFixed(1).toString().padEnd(9)}║ ${stats_[2].inputsPerMinute.ratio.toFixed(1).toString().padEnd(9)}║
         ╚══════════════════════════════════╩══════════╩══════════╝
         \`\`\``);
     }

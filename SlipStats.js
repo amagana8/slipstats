@@ -13,9 +13,12 @@ module.exports = {
     // turns frame_count into min:sec format
     convertTime: function(frame_count) {
         const duration = frame_count / 60;
-        const minutes = Math.floor(duration/60);
-        const seconds = Math.round(duration - (minutes*60));
-        const time = minutes.toString() + ":" + seconds.toString();
+        const minutes = Math.floor(duration/60).toString();
+        let seconds = Math.round(duration - (minutes*60)).toString();
+        if (seconds.len > 1) {
+            seconds = '0' + seconds;
+        }
+        const time = minutes + ":" + seconds;
         return time;
     },
     //split stats up by category and player
