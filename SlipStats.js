@@ -2,9 +2,15 @@ const { default: SlippiGame } = require('slp-parser-js'); //require the slp-pars
 var fs = require('fs'); //require the file system module
 
 module.exports = {
+    // find most recent replay in path
+    findReplay: function(file_path) {
+        var files = fs.readdirSync(file_path);
+        const file = files[0];
+        return file;
+    },
     // get stats and metadata from a slippi replay
-    loadReplay: function(path) {
-        const game = new SlippiGame(path);
+    loadReplay: function(file) {
+        const game = new SlippiGame(file);
         const stats = game.getStats();
         const metadata = game.getMetadata();
         const settings = game.getSettings();

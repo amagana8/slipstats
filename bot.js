@@ -1,16 +1,17 @@
 // require the discord.js module
 const Discord = require('discord.js');
 const slipStats = require('./SlipStats');
+const path = require('path');
 
 // set bot token
-const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xs9_9g.-dTe6LSsTGbdNeUGSoWeDHukB-4';
+const token = '';
 
 // create a new Discord client
 const client = new Discord.Client();
 
 // set command prefix
 const prefix = '!';
-
+var file_path = '';
 client.on('message', (msg) => {
     // look for command messages only
     if (!msg.content.startsWith(prefix) || msg.author.bot) {
@@ -19,10 +20,13 @@ client.on('message', (msg) => {
     // get bot command and command argument
     const args = msg.content.slice(prefix.length).split(' ');
     const command = args.shift().toLowerCase();
+    if (command === 'path') {
+        file_path = msg.content.substring(6);
+        msg.channel.send(`Path set to ${file_path}`);
+    }
     if (command === 'stats') {
-        let path = msg.content.substring(7);
-        path = decodeURIComponent(path);
-        const game_data = slipStats.loadReplay(path);
+        const replay = slipStats.findReplay(file_path);
+        const game_data = slipStats.loadReplay(path.join(file_path,replay));
         const stage_ = slipStats.getStageName(game_data[2].stageId);
         const time_ = slipStats.convertTime(game_data[1].lastFrame);
         const player1 = slipStats.assignPlayers(game_data[1])[0];
