@@ -25,7 +25,7 @@ client.on('message', (msg) => {
         msg.channel.send(`Path set to ${file_path}`);
     }
     if (command === 'stats') {
-        const replay = slipStats.findReplay(file_path);
+        const replay = slipStats.findLatestReplay(file_path);
         const game_data = slipStats.loadReplay(path.join(file_path,replay));
         const stage_ = slipStats.getStageName(game_data[2].stageId);
         const time_ = slipStats.convertTime(game_data[1].lastFrame);

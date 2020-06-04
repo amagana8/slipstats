@@ -18,6 +18,7 @@
   "homepage": "https://github.com/amagana8/slipstats#readme",
   "dependencies": {
     "discord.js": "^12.2.0",
-    "slp-parser-js": "^4.1.0"
+    "slp-parser-js": "^4.1.0",
+    "underscore": "^1.10.2"
   }
 }

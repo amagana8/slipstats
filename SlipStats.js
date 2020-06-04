@@ -1,12 +1,16 @@
 const { default: SlippiGame } = require('slp-parser-js'); //require the slp-parser-js module
-var fs = require('fs'); //require the file system module
+const fs = require('fs'); //require the file system module
+const path = require('path'); //requre the path module
+const _ = require('underscore'); //requre the underscore module
 
 module.exports = {
     // find most recent replay in path
-    findReplay: function(file_path) {
-        var files = fs.readdirSync(file_path);
-        const file = files[0];
-        return file;
+    findLatestReplay: function(dir) {
+        var files = fs.readdirSync(dir);
+        return _.max(files, function (f) {
+            var fullpath = path.join(dir, f);
+            return fs.statSync(fullpath).ctime;
+        });
     },
     // get stats and metadata from a slippi replay
     loadReplay: function(file) {
