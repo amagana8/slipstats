@@ -1,7 +1,7 @@
-const { default: SlippiGame } = require('slp-parser-js'); // require the slp-parser-js module
-const fs = require('fs'); // require the file system module
-const path = require('path'); // require the path module
-const _ = require('underscore'); // require the underscore module
+const { default: SlippiGame } = require('slp-parser-js');
+const fs = require('fs');
+const path = require('path');
+const _ = require('underscore');
 
 module.exports = {
     // find most recent replay in path

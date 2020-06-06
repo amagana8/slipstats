@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
     //make stats table from replay
     makeTable: function(replay, file_path) {
+        try {
         const game_data = statTools.loadReplay(path.join(file_path,replay));
         const stage_ = statTools.getStageName(game_data[2].stageId);
         const time_ = statTools.convertTime(game_data[1].lastFrame);
@@ -44,5 +45,9 @@ module.exports = {
         ║ Inputs/Min                       ║ ${stats_[0].inputsPerMinute.ratio.toFixed(1).toString().padEnd(9)}║ ${stats_[2].inputsPerMinute.ratio.toFixed(1).toString().padEnd(9)}║
         ╚══════════════════════════════════╩══════════╩══════════╝
         \`\`\``);
+        }
+        catch {
+            return "Invalid replay file or path. Please check file and set path before trying again.";
+        }
     }
 }
