@@ -3,7 +3,7 @@ const statTools = require('./StatTools');
 const table = require('./MakeTable');
 
 // set bot token
-const token = 'NzE0NDAxMTk0OTMxMzg4NDg4.Xtljcg.AeSq29OqqlJpBG3CUGdPL6qTjfg';
+const token = '';
 
 // create a new Discord client
 const client = new Discord.Client();
