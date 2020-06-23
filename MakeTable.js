@@ -12,6 +12,14 @@ module.exports = {
         const player2 = statTools.assignPlayers(game_data[1])[1];
         const char1 = statTools.getCharName(parseInt(Object.keys(player1.characters)));
         const char2 = statTools.getCharName(parseInt(Object.keys(player2.characters)));
+        let name1 = '';
+        let name2 = '';
+        if (player1.names.netplay !== undefined) {
+            name1 = 'Player 2:' + player1.names.netplay + ' as ' + char1;
+        }
+        if (player2.names.netplay !== undefined) {
+            name2 = 'Player 1: ' + player2.names.netplay + ' as ' + char2;
+        }
         const stats_ = statTools.playerStats(game_data[0]);
         const actions1 = stats_[1].wavedashCount.toString() + '/' + stats_[1].wavelandCount.toString() + '/' + stats_[1].dashDanceCount.toString();
         const actions2 = stats_[3].wavedashCount.toString() + '/' + stats_[3].wavelandCount.toString() + '/' + stats_[3].dashDanceCount.toString();
@@ -19,10 +27,10 @@ module.exports = {
         const ocr2 = statTools.ratioPercent(stats_[2].successfulConversions.ratio).toString() + '%';
         return(`\`\`\`
         Stage: ${stage_}                     Duration: ${time_}
-        Player 1: ${player1.names.netplay} as ${char1}
-        Player 2: ${player2.names.netplay} as ${char2}
+        ${name1}
+        ${name2}
         ╔══════════════════════════════════╦══════════╦══════════╗
-        ║                                  ║ Player 1 ║ Player 2 ║
+        ║ Stats                            ║ Player 1 ║ Player 2 ║
         ╠══════════════════════════════════╬══════════╬══════════╣
         ║ Kills                            ║ ${stats_[0].killCount.toString().padEnd(9)}║ ${stats_[2].killCount.toString().padEnd(9)}║
         ╠══════════════════════════════════╬══════════╬══════════╣

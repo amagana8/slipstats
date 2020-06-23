@@ -123,7 +123,7 @@ module.exports = {
         21: 'Dr Mario',
         22: 'Falco',
         23: 'Pichu',
-        24: 'Game And Watch',
+        24: 'Mr. Game & Watch',
         25: 'Ganondorf',
         26: 'Roy',
         27: 'Master Hand',
